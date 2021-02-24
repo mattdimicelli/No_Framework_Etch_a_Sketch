@@ -107,6 +107,8 @@ section {
 }
 body {
   line-height: 1;
+  height: 100vh;
+  width: 100vw;
 }
 ol,
 ul {
@@ -129,8 +131,6 @@ table {
 }
 div {
   background-color: blue;
-  width: 30px;
-  height: 30px;
 }
 .hovered {
   background-color: red;
@@ -140,4 +140,13 @@ div {
   display: grid;
   grid-template-columns: repeat(16, 1fr);
   grid-template-rows: repeat(16, 1fr);
+  box-sizing: border-box;
+  width: 100%;
+  height: 97%;
+}
+#mainButton {
+  display: block;
+  width: 20%;
+  margin-left: auto;
+  margin-right: auto;
 }
