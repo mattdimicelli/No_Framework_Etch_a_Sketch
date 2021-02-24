@@ -127,3 +127,17 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+div {
+  background-color: blue;
+  width: 30px;
+  height: 30px;
+}
+.hovered {
+  background-color: red;
+}
+#container {
+  background-color: white;
+  display: grid;
+  grid-template-columns: repeat(16, 1fr);
+  grid-template-rows: repeat(16, 1fr);
+}
