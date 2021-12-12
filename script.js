@@ -26,26 +26,59 @@ function createGrid(numberOfCellsPerAxis) {
 
 function changeColor(e) {
   let cell = e.currentTarget;
-  if ('shade' in cell) {
-    /* cell has been previously shaded darker on a spectrum leading to black.
-    continue to shade the cell darker until it is black */
+  if ('shadesDarker' in cell) {
+    /* cell has been previously given a random background color.
+    now shade the cell darker 10%, stopping when black */
+    if (cell.shadesDarker === 9) return;
     
-  } else if (!('shade' in cell)) {
-    console.log(getComputedStyle(cell).backgroundColor);
+    const darker = cell.lightness - (cell.shadesDarker * cell.oneShade);
+ 
+    const newHSL = `hsl(${cell.h}, ${cell.s}%, ${darker}%)`;
+    cell.style.backgroundColor = newHSL;
+    cell.shadesDarker++;
+  } else if (!('shadesDarker' in cell)) {
+    cell.shadesDarker = 0;
+    cell.style.backgroundColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
     const REGEX = /rgb\((?:([0-9]{1,2}|1[0-9]{1,2}|2[0-4][0-9]|25[0-5]), ?)(?:([0-9]{1,2}|1[0-9]{1,2}|2[0-4][0-9]|25[0-5]), ?)(?:([0-9]{1,2}|1[0-9]{1,2}|2[0-4][0-9]|25[0-5]))\)/;
-    const cellRGB = getComputedStyle(cell).backgroundColor.match(REGEX);
-    const r = +cellRGB[1];
-    const g = +cellRGB[2];
-    const b = +cellRGB[3];
-    const lightness = rgbToLightness(r,g,b);
-    console.log(lightness);
+    const originalCellColorRGB = getComputedStyle(cell).backgroundColor.match(REGEX);
+    const r = +originalCellColorRGB[1];
+    const g = +originalCellColorRGB[2];
+    const b = +originalCellColorRGB[3];
+    const [h, s, l] = rgbToHsl(r, g, b);
+    console.log(h,s,l)
+    cell.h = h;
+    cell.s = s * 100;
+    cell.lightness = l * 100;
+    cell.oneShade = cell.lightness / 10;  // 'one shade' is 10% (darker) than the original 'lightness'
+  }
     
     function rgbToLightness(r,g,b) {
       return 1/2 * (Math.max(r,g,b) + Math.min(r,g,b));
     } 
-  }
-  // cell.style.backgroundColor =
-  //     "#" + Math.floor(Math.random() * 16777215).toString(16);
+
+    function rgbToHsl(r, g, b) {
+      r /= 255, g /= 255, b /= 255;
+    
+      var max = Math.max(r, g, b), min = Math.min(r, g, b);
+      var h, s, l = (max + min) / 2;
+    
+      if (max == min) {
+        h = s = 0; // achromatic
+      } else {
+        var d = max - min;
+        s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+    
+        switch (max) {
+          case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+          case g: h = (b - r) / d + 2; break;
+          case b: h = (r - g) / d + 4; break;
+        }
+    
+        h /= 6;
+      }
+    
+      return [ h, s, l ];
+    }
 }
 
 function btnClickHandler() {
