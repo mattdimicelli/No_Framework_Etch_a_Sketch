@@ -38,18 +38,14 @@ function changeColor(e) {
     cell.shadesDarker++;
   } else if (!('shadesDarker' in cell)) {
     cell.shadesDarker = 0;
-    cell.style.backgroundColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
-    const REGEX = /rgb\((?:([0-9]{1,2}|1[0-9]{1,2}|2[0-4][0-9]|25[0-5]), ?)(?:([0-9]{1,2}|1[0-9]{1,2}|2[0-4][0-9]|25[0-5]), ?)(?:([0-9]{1,2}|1[0-9]{1,2}|2[0-4][0-9]|25[0-5]))\)/;
-    const originalCellColorRGB = getComputedStyle(cell).backgroundColor.match(REGEX);
-    const r = +originalCellColorRGB[1];
-    const g = +originalCellColorRGB[2];
-    const b = +originalCellColorRGB[3];
-    const [h, s, l] = rgbToHsl(r, g, b);
-    console.log(h,s,l)
-    cell.h = h;
+    // create a random HSL value
+    cell.h = generateRandomHue;
     cell.s = s * 100;
     cell.lightness = l * 100;
     cell.oneShade = cell.lightness / 10;  // 'one shade' is 10% (darker) than the original 'lightness'
+    function generateRandomHue() {
+      
+    }
   }
     
     function rgbToLightness(r,g,b) {
