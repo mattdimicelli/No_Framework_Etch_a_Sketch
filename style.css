@@ -3,15 +3,80 @@ body {
   height: 100vh;
 }
 .cell {
-  background-color: blue;
+  background-color: #fffffd;
+}
+
+.frame {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 5% 10%;
+}
+.frame-top, .frame-bottom {
+  height: 20%;
+  width: 100%;
+}
+.name {
+  font-family: 'Lobster', cursive;
+  font-size: 3rem;
+  margin: 0 1.5rem;
+}
+.frame-bottom {
+  border-radius: 0 0 5px 5px;
+  display: flex;
+  justify-content: space-between;
+}
+.frame-top {
+  color: #F9D00F;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-style: italic;
+}
+.frame-left, .frame-right {
+  width: 20%;
+}
+.frame-top, .frame-bottom, .frame-left, .frame-right {
+  background-color: #F92727;
+}
+
+.frame-sides-and-screen {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+.background {
+  background-color: #F9D00F;
+  height: 100%;
+  padding-top: 5px;
 }
 .container {
   display: grid;
-  height: 97%;
+  height: 100%;
+  width: 100%;
 }
 .size-btn {
   display: block;
-  width: 20%;
+  width: 10rem;
+  text-align: center;
   margin-left: auto;
   margin-right: auto;
+  background-color: #fffffd;
+  border-radius: 8px;
+  padding: 5px 0;
+}
+.size-btn:hover {
+  outline: 1px solid black;
+}
+.knob-left {
+  margin-left: 1rem;
+}
+.knob-right {
+  margin-right: 1rem;
+}
+.knob-right, .knob-left {
+  margin-bottom: 0.2rem;
 }

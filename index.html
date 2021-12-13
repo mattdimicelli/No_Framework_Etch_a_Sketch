@@ -6,11 +6,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./reset.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./style.css">
   </head>
   <body>
-    <button class="size-btn">Set Size of Grid</button>
-    <div class="container"></div>
+    <div class="background">
+      <button class="size-btn">Set Size of Grid</button>
+      <div class="frame">
+        <div style="border-radius: 5px 5px 0 0;" class="frame-top">MAGIC <span class="name">Etch A Sketch</span> SCREEN</div>
+        <div class="frame-sides-and-screen">
+          <div class="frame-left"></div>
+          <div class="container"></div>
+          <div class="frame-right"></div>
+        </div>
+        <div class="frame-bottom">
+          <img class="knob-left" src="./knob.png" alt="etch a sketch left knob">
+          <img class="knob-right" src="./knob.png" alt="etch a sketch right knob">
+        </div>
+      </div>
+    </div>
     <script src="./script.js"></script>
   </body>
 </html>

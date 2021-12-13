@@ -26,55 +26,40 @@ function createGrid(numberOfCellsPerAxis) {
 
 function changeColor(e) {
   let cell = e.currentTarget;
-  if ('shadesDarker' in cell) {
-    /* cell has been previously given a random background color.
-    now shade the cell darker 10%, stopping when black */
-    if (cell.shadesDarker === 9) return;
-    
-    const darker = cell.lightness - (cell.shadesDarker * cell.oneShade);
- 
-    const newHSL = `hsl(${cell.h}, ${cell.s}%, ${darker}%)`;
+  if ('darkness' in cell) {
+    makeCellDarker();
+  }
+  else if (!('darkness' in cell)) {
+    randomlyColorCell();
+  }
+  function makeCellDarker() {
+    /* shade the cell darker 10%, stopping when black */
+    if (cell.darkness === 11) return;
+    const darker = cell.lightnessL - (cell.darkness * cell.oneShadeDarker);
+    const newHSL = `${cell.truncatedHSL} ${darker}%`;
     cell.style.backgroundColor = newHSL;
-    cell.shadesDarker++;
-  } else if (!('shadesDarker' in cell)) {
-    cell.shadesDarker = 0;
-    // create a random HSL value
-    cell.h = generateRandomHue;
-    cell.s = s * 100;
-    cell.lightness = l * 100;
-    cell.oneShade = cell.lightness / 10;  // 'one shade' is 10% (darker) than the original 'lightness'
-    function generateRandomHue() {
-      
+    cell.darkness++;
+  }
+  function randomlyColorCell() {
+    cell.darkness = 1;
+    cell.lightnessL = generateRandomPercentage();
+    cell.truncatedHSL = generateTruncatedRandomHSL();
+    cell.style.backgroundColor = generateCompleteRandomHSL(cell.truncatedHSL, cell.lightnessL);
+    cell.oneShadeDarker = cell.lightnessL / 10;  
+    function generateCompleteRandomHSL(truncatedHSL, lightness) {
+      return `${truncatedHSL} ${lightness}%`;
+    }
+    function generateRandomPercentage() {
+      return Math.floor(Math.random() * 101);
+    }
+    function generateTruncatedRandomHSL() {
+      return `hsl(${generateRandomHue()}, ${generateRandomPercentage()}%,`;
+
+      function generateRandomHue() {
+        return Math.floor(Math.random() * 361);
+      }
     }
   }
-    
-    function rgbToLightness(r,g,b) {
-      return 1/2 * (Math.max(r,g,b) + Math.min(r,g,b));
-    } 
-
-    function rgbToHsl(r, g, b) {
-      r /= 255, g /= 255, b /= 255;
-    
-      var max = Math.max(r, g, b), min = Math.min(r, g, b);
-      var h, s, l = (max + min) / 2;
-    
-      if (max == min) {
-        h = s = 0; // achromatic
-      } else {
-        var d = max - min;
-        s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
-    
-        switch (max) {
-          case r: h = (g - b) / d + (g < b ? 6 : 0); break;
-          case g: h = (b - r) / d + 2; break;
-          case b: h = (r - g) / d + 4; break;
-        }
-    
-        h /= 6;
-      }
-    
-      return [ h, s, l ];
-    }
 }
 
 function btnClickHandler() {
