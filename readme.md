@@ -20,8 +20,8 @@ with each pass of the mouse.
 
 ### Links
 
-- [Live site](https://mattdimicelli.github.io/Etch-a-Sketch/)
-- [Repo](https://github.com/mattdimicelli/Etch-a-Sketch)
+- [Live site](https://mattdimicelli.github.io/No_Framework_Etch_a_Sketch/)
+- [Repo](https://github.com/mattdimicelli/No_Framework_Etch_a_Sketch/)
 
 ## My process
 
